@@ -46,6 +46,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'rails-erd'
 end
 
 group :development do
