@@ -47,6 +47,8 @@ group :development, :test do
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'rails-erd'
+  gem 'hirb'
+  gem 'hirb-unicode-steakknife'
 end
 
 group :development do
