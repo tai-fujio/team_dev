@@ -1,14 +1,20 @@
 class AssignsController < ApplicationController
   before_action :authenticate_user!
 
+  
   def create
-    team = Team.friendly.find(params[:team_id])
+    @team = Team.friendly.find(params[:team_id])
     user = email_reliable?(assign_params) ? User.find_or_create_by_email(assign_params) : nil
     if user
-      team.invite_member(user)
-      redirect_to team_url(team), notice: I18n.t('views.messages.assigned')
+      @team.invite_member(user)
+      if @team.valid?
+        redirect_to team_url(@team), notice: I18n.t('views.messages.assigned')
+      else
+        render template: 'teams/show'
+        # redirect_to team_url(@team), notice: I18n.t('views.messages.failed_to_assign')
+      end
     else
-      redirect_to team_url(team), notice: I18n.t('views.messages.failed_to_assign')
+      redirect_to team_url(@team), notice: I18n.t('views.messages.failed_to_assign')
     end
   end
 
@@ -47,3 +53,15 @@ class AssignsController < ApplicationController
     change_keep_team(assigned_user, another_team) if assigned_user.keep_team_id == assign.team_id
   end
 end
+
+# 322: define_method(name) do |*args|
+#   => 323:   last = args.last
+#      324:   options = \
+#      325:     case last
+#      326:     when Hash
+#      327:       args.pop
+#      328:     when ActionController::Parameters
+#      329:       args.pop.to_h
+#      330:     end
+#      331:   helper.call self, args, options
+#      332: end
