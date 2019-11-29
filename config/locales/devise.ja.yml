@@ -28,13 +28,13 @@ ja:
     models:
       user: "ユーザ"
       assign: "チームアサイン"
-       team: "チーム"
-       agenda: "アジェンダ"
-       argicle: "トピック"
-       comment: "コメント"
-     attributes:
-       team:
-         assigns: チームアサイン
+      team: "チーム"
+      agenda: "アジェンダ"
+      argicle: "トピック"
+      comment: "コメント"
+    attributes:
+      team:
+        assigns: チームアサイン
   devise:
     confirmations:
       confirmed: "アカウントを登録しました。"
