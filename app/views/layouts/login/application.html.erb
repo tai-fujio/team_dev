@@ -16,6 +16,9 @@
       <!-- /.login-logo -->
       <div class="card">
         <div class="card-body login-card-body">
+          <% flash.each do |name, msg| %>
+            <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+          <% end %>
           <%= yield %>
         </div>
         <!-- /.login-card-body -->
