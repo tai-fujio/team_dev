@@ -38,7 +38,7 @@
                       <td><%= image_tag default_img(article.team.icon_url), size: '40x40' %></td>
                       <td>
                         <%= link_to article_path(article) do %>
-                          <span><%= article.team.name %><%= I18n.t('views.common.team') %>　</span>
+                          <span><%= article.team.name %><%= I18n.t('views.common.team') %></span>
                           <span class="badge bg-primary"><%= article.agenda.title %></span>
                           <%= article.title %>
                         <% end %>

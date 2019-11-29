@@ -31,7 +31,7 @@
               <table class="table">
                 <tr>
                   <td><%= image_tag 'default.jpg', size: '40x40' %></td>
-                  <td><label style="background-color: red"><%= I18n.t('views.messages.leader') %></label>：<%= @team.owner.email %></td>
+                  <td><label style="background-color: red"><%= I18n.t('views.messages.leader') %></label>:<%= @team.owner.email %></td>
                 </tr>
               </table>
               <h5><%= I18n.t('views.messages.team_members2') %></h5>
@@ -42,6 +42,9 @@
                       <td><%= image_tag 'default.jpg', size: '40x40' %></td>
                       <td><%= assign.user.email %></td>
                       <td><%= link_to I18n.t('views.button.delete'), team_assign_path(@team, assign), method: :delete, class: 'btn btn-sm btn-danger' %></td>
+                      <% if current_user.id == @team.owner_id && current_user.id != assign.user_id %>
+                        <td><%= link_to I18n.t('views.button.delegation'), {controller: "teams", action: "team_owner_delegation",id:@team.id,user_id:assign.user_id}, {method: :patch ,class: 'btn btn-sm btn-default'} %></td>
+                      <% end%>
                     </tr>
                   <% end %>
                 </tbody>

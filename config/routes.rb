@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'statics#top'
   get :dashboard, to: 'teams#dashboard'
+  patch :team_owner_delegation, to: 'teams#team_owner_delegation'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',

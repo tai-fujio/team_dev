@@ -47,6 +47,16 @@ class TeamsController < ApplicationController
     @team = current_user.keep_team_id ? Team.find(current_user.keep_team_id) : current_user.teams.first
   end
 
+  def team_owner_delegation
+    @team = Team.find(params[:id])
+    @team.owner_id = params[:user_id]
+    if @team.save
+      redirect_to @team, notice: I18n.t('views.messages.owner_delegation')
+    else
+      flash.now[:error] = I18n.t('views.messages.owner_delegation_failed')
+      render :show
+    end
+  end
   private
 
   def set_team
