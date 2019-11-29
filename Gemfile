@@ -46,6 +46,8 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'spring'
   gem 'spring-commands-rspec'
+  gem 'rails-erd'
+  gem 'hirb-unicode-steakknife'
 end
 
 group :development do

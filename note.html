@@ -1,0 +1,12 @@
+
+# 322: define_method(name) do |*args|
+#   => 323:   last = args.last
+#      324:   options = \
+#      325:     case last
+#      326:     when Hash
+#      327:       args.pop
+#      328:     when ActionController::Parameters
+#      329:       args.pop.to_h
+#      330:     end
+#      331:   helper.call self, args, options
+#      332: end
