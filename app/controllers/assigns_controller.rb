@@ -2,18 +2,18 @@ class AssignsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    team = Team.friendly.find(params[:team_id])
+    @team = Team.friendly.find(params[:team_id])
     user = email_reliable?(assign_params) ? User.find_or_create_by_email(assign_params) : nil
     if user
-      team.invite_member(user)
-      if team.valid?
-        redirect_to team_url(team), notice: I18n.t('views.messages.assigned')
+      @team.invite_member(user)
+      if @team.valid?
+        redirect_to team_url(@team), notice: I18n.t('views.messages.assigned')
       else
         render template: 'teams/show'
         # redirect_to team_url(@team), notice: I18n.t('views.messages.failed_to_assign')
       end
     else
-      redirect_to team_url(team), notice: I18n.t('views.messages.failed_to_assign')
+      redirect_to team_url(@team), notice: I18n.t('views.messages.failed_to_assign')
     end
   end
 
