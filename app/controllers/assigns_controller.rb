@@ -6,7 +6,12 @@ class AssignsController < ApplicationController
     user = email_reliable?(assign_params) ? User.find_or_create_by_email(assign_params) : nil
     if user
       team.invite_member(user)
-      redirect_to team_url(team), notice: I18n.t('views.messages.assigned')
+      if team.valid?
+        redirect_to team_url(team), notice: I18n.t('views.messages.assigned')
+      else
+        render template: 'teams/show'
+        # redirect_to team_url(@team), notice: I18n.t('views.messages.failed_to_assign')
+      end
     else
       redirect_to team_url(team), notice: I18n.t('views.messages.failed_to_assign')
     end
