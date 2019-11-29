@@ -1,6 +1,6 @@
 class AssignsController < ApplicationController
   before_action :authenticate_user!
-
+  before_action :possible_to_destroy_authentification, only: [:destroy]
   
   def create
     @team = Team.friendly.find(params[:team_id])
@@ -10,6 +10,7 @@ class AssignsController < ApplicationController
       if @team.valid?
         redirect_to team_url(@team), notice: I18n.t('views.messages.assigned')
       else
+        flash.now[:notice] = I18n.t('views.messages.failed_to_assign')
         render template: 'teams/show'
         # redirect_to team_url(@team), notice: I18n.t('views.messages.failed_to_assign')
       end
@@ -19,9 +20,14 @@ class AssignsController < ApplicationController
   end
 
   def destroy
+    @user = current_user
     assign = Assign.find(params[:id])
+    if assign.user_id == current_user.id
+      assign.destroy
+      flash.now[:notice] = I18n.t('views.messages.user_page_transition')
+      render template: "users/show" and return
+    end
     destroy_message = assign_destroy(assign, assign.user)
-
     redirect_to team_url(params[:team_id]), notice: destroy_message
   end
 
@@ -52,16 +58,14 @@ class AssignsController < ApplicationController
     another_team = Assign.find_by(user_id: assigned_user.id).team
     change_keep_team(assigned_user, another_team) if assigned_user.keep_team_id == assign.team_id
   end
-end
 
-# 322: define_method(name) do |*args|
-#   => 323:   last = args.last
-#      324:   options = \
-#      325:     case last
-#      326:     when Hash
-#      327:       args.pop
-#      328:     when ActionController::Parameters
-#      329:       args.pop.to_h
-#      330:     end
-#      331:   helper.call self, args, options
-#      332: end
+  def possible_to_destroy_authentification
+    @team = Team.find_by(name: params[:team_id].to_s)
+    assign = Assign.find(params[:id])
+    unless (assign.user_id == current_user.id) || (@team.owner_id == current_user.id)
+      flash.now[:notice] = I18n.t('views.messages.destroy_notification')
+      render template: 'teams/show'
+    end
+  end
+
+end

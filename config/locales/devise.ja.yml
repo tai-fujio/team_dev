@@ -27,6 +27,14 @@ ja:
         updated_at: "更新日"
     models:
       user: "ユーザ"
+      assign: "チームアサイン"
+      team: "チーム"
+      agenda: "アジェンダ"
+      argicle: "トピック"
+      comment: "コメント"
+    attributes:
+      team:
+        assigns: チームアサイン
   devise:
     confirmations:
       confirmed: "アカウントを登録しました。"
@@ -51,9 +59,9 @@ ja:
         instruction: "次のリンクでメールアドレスの確認が完了します。"
         subject: "アカウントの有効化について"
       email_changed:
-        greeting: 
-        message: 
-        subject: 
+        greeting:
+        message:
+        subject:
       password_change:
         greeting: "%{recipient}様"
         message: "パスワードが再設定されたことを通知します。"
