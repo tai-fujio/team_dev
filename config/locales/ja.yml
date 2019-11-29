@@ -252,7 +252,7 @@ ja:
       team_you_belong_to: '所属しているチーム'
       posted_articles: '投稿した記事一覧'
       edit_notification: 'チームのオーナーのみ編集可能です'
-      destroy_notification: 'アサインメンバー自身かチームのオーナーのみ削除可能です'
+      destroy_notification: 'チームメンバー自身かチームのオーナーのみ削除可能です'
       user_page_transition: '削除しました  アサインチームから抜けました'
       delete_confirmatin: '削除してもよろしいですか'
     button:

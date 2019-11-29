@@ -24,8 +24,9 @@ class AssignsController < ApplicationController
     assign = Assign.find(params[:id])
     if assign.user_id == current_user.id
       assign.destroy
-      flash.now[:notice] = I18n.t('views.messages.user_page_transition')
-      render template: "users/show" and return
+      flash[:notice] = I18n.t('views.messages.user_page_transition')
+      redirect_to user_url(params[:user_id]) and return
+      # render template: "users/show" and return
     end
     destroy_message = assign_destroy(assign, assign.user)
 
