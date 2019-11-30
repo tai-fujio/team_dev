@@ -13,8 +13,13 @@ class AgendasController < ApplicationController
   def destroy
     @team = Team.find(params[:team_id])
     @agenda = Agenda.find(params[:id])
-    @agenda.destroy
-    render template: 'teams/show'
+    if @agenda.destroy
+      flash.now[:notice] = I18n.t('views.messages.agenda_deleted')
+      render template: 'teams/show' and return
+    else
+      flash.now[:error] = I18n.t('views.messages.agenda_not_deleted')
+      render template: 'teams/show' and return
+    end
   end
 
   def create
