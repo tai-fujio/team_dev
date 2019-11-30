@@ -1,0 +1,16 @@
+<%= link_to "hoge", {controller: "users", action: "update", user_id: 1}, method: :post %>
+<td><%= link_to I18n.t('views.button.delegation'), {controller:"teams", action: "team_owner_delegation",method: :patch,
+class: 'btn btn-sm btn-default' %></td>
+
+path(@team , params: {team:{owner_id:assign.id}}),method: :patch, class: 'btn btn-sm btn-default' %></td>
+
+
+
+<%= link_to "hoge", {controller: "users", action: "update", user_id: 1}, method: :post %>
+<td><%= link_to I18n.t('views.button.delegation'), team_path(@team , params: {team:{owner_id:assign.id}}),method: :patch, class: 'btn btn-sm btn-default' %></td>
+
+チームリーダーのチームページに、各チームメンバーへの権限移動ボタン
+権限ボタンを押すとそのメンバーにチームオーナー権限が移動
+チームオーナーの権限移動時、新オーナーに通知メール
+
+[Fixed]チームリーダーが、他のチームメンバーにリーダー権限を渡せる機能を実装すること
