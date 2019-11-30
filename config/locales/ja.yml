@@ -254,6 +254,11 @@ ja:
       delete_agenda_confirmation: 'アジェンダを削除しますか？'
       agenda_deleted: 'アジェンダが削除されました'
       agenda_not_deleted: 'アジェンダの削除に失敗しました'
+      delete_authentication_notice: 'チームオーナーかアジェンダ作者のみ削除できます'
+      agenda_deleted_notify: 'アジェンダ削除のお知らせ'
+      agenda_deleted_notify_context1: 'DIVEINTOPOSTのチーム名「'
+      agenda_deleted_notify_context2: '」のアジェンダ「'
+      agenda_deleted_notify_context3: '」は削除されました'
     button:
       submit: '投稿'
       edit: '編集'

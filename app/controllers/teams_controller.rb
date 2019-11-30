@@ -24,7 +24,7 @@ class TeamsController < ApplicationController
       @team.invite_member(@team.owner)
       redirect_to @team, notice: I18n.t('views.messages.create_team')
     else
-      flash.now[:error] = I18n.t('views.messages.failed_to_save_team')
+      flash.now[:notice] = I18n.t('views.messages.failed_to_save_team')
       render :new
     end
   end
@@ -33,7 +33,7 @@ class TeamsController < ApplicationController
     if @team.update(team_params)
       redirect_to @team, notice: I18n.t('views.messages.update_team')
     else
-      flash.now[:error] = I18n.t('views.messages.failed_to_save_team')
+      flash.now[:notice] = I18n.t('views.messages.failed_to_save_team')
       render :edit
     end
   end

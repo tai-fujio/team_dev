@@ -60,4 +60,5 @@ class ArticlesController < ApplicationController
   def article_params
     params.fetch(:article, {}).permit %i[title content image image_cache]
   end
+
 end
