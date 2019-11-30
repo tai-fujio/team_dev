@@ -53,4 +53,13 @@ class AssignsController < ApplicationController
     another_team = Assign.find_by(user_id: assigned_user.id).team
     change_keep_team(assigned_user, another_team) if assigned_user.keep_team_id == assign.team_id
   end
+
+  def possible_to_destroy_authentification
+    @team = Team.find_by(name: params[:team_id].to_s)
+    assign = Assign.find(params[:id])
+    unless (assign.user_id == current_user.id) || (@team.owner_id == current_user.id)
+      flash.now[:notice] = I18n.t('views.messages.destroy_notification')
+      render template: 'teams/show'
+    end
+  end
 end
