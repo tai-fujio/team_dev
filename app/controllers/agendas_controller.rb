@@ -9,7 +9,7 @@ class AgendasController < ApplicationController
     @team = Team.friendly.find(params[:team_id])
     @agenda = Agenda.new
   end
-  
+
   def destroy
     @team = Team.find(params[:team_id])
     @agenda = Agenda.find(params[:id])
