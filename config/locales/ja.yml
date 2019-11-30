@@ -227,7 +227,8 @@ ja:
       create_article: '記事を作成する'
       comment_list: 'コメント一覧'
       post_comment: 'コメント投稿'
-      initial_assign: 'あなたのアドレスが、DIVEINTOPOSTのチームにアサインされました！'
+      initial_assign1: 'DIVEINTOPOSTの'
+      initial_assign2: 'にアサインされました！'
       initial_password: '初期パスワード:'
       author: '投稿者'
       delete_comment: 'コメントを削除する'
@@ -253,6 +254,7 @@ ja:
       posted_articles: '投稿した記事一覧'
       owner_delegation: 'チームオーナーが変更されました'
       owner_delegation_failed: 'チームオーナーの変更に失敗しました'
+      owner_delegation_notification: 'オーナー変更のお知らせ'
     button:
       submit: '投稿'
       edit: '編集'

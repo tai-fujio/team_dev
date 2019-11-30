@@ -44,6 +44,8 @@
                       <td><%= link_to I18n.t('views.button.delete'), team_assign_path(@team, assign), method: :delete, class: 'btn btn-sm btn-danger' %></td>
                       <% if current_user.id == @team.owner_id && current_user.id != assign.user_id %>
                         <td><%= link_to I18n.t('views.button.delegation'), {controller: "teams", action: "team_owner_delegation",id:@team.id,user_id:assign.user_id}, {method: :patch ,class: 'btn btn-sm btn-default'} %></td>
+                      <% else %>
+                        <td></td>
                       <% end%>
                     </tr>
                   <% end %>
