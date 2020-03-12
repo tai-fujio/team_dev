@@ -22,7 +22,6 @@ class AssignsController < ApplicationController
       render template: "users/show" and return
     end
     destroy_message = assign_destroy(assign, assign.user)
-
     redirect_to team_url(params[:team_id]), notice: destroy_message
   end
 
