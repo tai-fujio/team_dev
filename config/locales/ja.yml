@@ -259,6 +259,9 @@ ja:
       agenda_deleted_notify_context1: 'DIVEINTOPOSTのチーム名「'
       agenda_deleted_notify_context2: '」のアジェンダ「'
       agenda_deleted_notify_context3: '」は削除されました'
+      edit_notification: 'チームのオーナーのみ編集可能です'
+      destroy_notification: 'チームメンバー自身かチームのオーナーのみ削除可能です'
+      user_page_transition: '削除しました  アサインチームから抜けました'
     button:
       submit: '投稿'
       edit: '編集'
