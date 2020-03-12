@@ -15,8 +15,9 @@ class ArticlesController < ApplicationController
   end
 
   def new
+    # @team = Team.find(current_user.keep_team.id)
     @agenda = Agenda.find(params[:agenda_id])
-    @team = @agenda.team
+    # @team = @agenda.team
     @article = @agenda.articles.build
   end
 
@@ -25,12 +26,13 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    # team = Team.find(current_user.keep_team.id)
     agenda = Agenda.find(params[:agenda_id])
-    article = agenda.articles.build(article_params)
-    article.user = current_user
-    article.team_id = agenda.team_id
-    if article.save
-      redirect_to article_url(article), notice: I18n.t('views.messages.create_article')
+    @article = agenda.articles.build(article_params)
+    @article.user = current_user
+    @article.team_id = agenda.team_id
+    if @article.save
+      redirect_to article_url(@article), notice: I18n.t('views.messages.create_article')
     else
       render :new
     end
@@ -58,4 +60,5 @@ class ArticlesController < ApplicationController
   def article_params
     params.fetch(:article, {}).permit %i[title content image image_cache]
   end
+
 end

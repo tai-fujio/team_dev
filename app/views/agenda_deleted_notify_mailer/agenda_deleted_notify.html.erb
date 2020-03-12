@@ -1,0 +1,3 @@
+<h4>To email: <%= @email %></h4>
+<h1><%= I18n.t('views.messages.agenda_deleted_notify') %></h1>
+<p><%= I18n.t('views.messages.agenda_deleted_notify_context1')+@agenda.team.name+I18n.t('views.messages.agenda_deleted_notify_context2')+@agenda.title+I18n.t('views.messages.agenda_deleted_notify_context3') %></p>

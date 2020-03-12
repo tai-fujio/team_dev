@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_team, only: %i[show edit update destroy]
+  before_action :possible_to_edit_authentification, only: [:edit]
 
   def index
     @teams = Team.all
@@ -24,7 +25,7 @@ class TeamsController < ApplicationController
       @team.invite_member(@team.owner)
       redirect_to @team, notice: I18n.t('views.messages.create_team')
     else
-      flash.now[:error] = I18n.t('views.messages.failed_to_save_team')
+      flash.now[:notice] = I18n.t('views.messages.failed_to_save_team')
       render :new
     end
   end
@@ -33,7 +34,7 @@ class TeamsController < ApplicationController
     if @team.update(team_params)
       redirect_to @team, notice: I18n.t('views.messages.update_team')
     else
-      flash.now[:error] = I18n.t('views.messages.failed_to_save_team')
+      flash.now[:notice] = I18n.t('views.messages.failed_to_save_team')
       render :edit
     end
   end
@@ -67,5 +68,12 @@ class TeamsController < ApplicationController
 
   def team_params
     params.fetch(:team, {}).permit %i[name icon icon_cache owner_id keep_team_id]
+  end
+
+  def possible_to_edit_authentification
+    if @team.owner_id != current_user.id
+      flash.now[:notice] = I18n.t('views.messages.edit_notification')
+      render :show
+    end
   end
 end
