@@ -1,5 +1,6 @@
 class AssignsController < ApplicationController
   before_action :authenticate_user!
+  before_action :possible_to_destroy_authentification, only: [:destroy]
 
   def create
     team = Team.friendly.find(params[:team_id])
@@ -13,7 +14,13 @@ class AssignsController < ApplicationController
   end
 
   def destroy
+    @user = current_user
     assign = Assign.find(params[:id])
+    if assign.user_id == current_user.id
+      assign.destroy
+      flash.now[:notice] = I18n.t('views.messages.user_page_transition')
+      render template: "users/show" and return
+    end
     destroy_message = assign_destroy(assign, assign.user)
 
     redirect_to team_url(params[:team_id]), notice: destroy_message
@@ -45,5 +52,14 @@ class AssignsController < ApplicationController
   def set_next_team(assign, assigned_user)
     another_team = Assign.find_by(user_id: assigned_user.id).team
     change_keep_team(assigned_user, another_team) if assigned_user.keep_team_id == assign.team_id
+  end
+
+  def possible_to_destroy_authentification
+    @team = Team.find_by(name: params[:team_id].to_s)
+    assign = Assign.find(params[:id])
+    unless (assign.user_id == current_user.id) || (@team.owner_id == current_user.id)
+      flash.now[:notice] = I18n.t('views.messages.destroy_notification')
+      render template: 'teams/show'
+    end
   end
 end
